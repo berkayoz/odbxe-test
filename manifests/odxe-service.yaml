@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: odxetest
+  namespace: odbpoc
+spec:
+  selector:
+    app: odbxe
+  ports:
+  - name: listener
+    port: 8080
+    targetPort: 8080

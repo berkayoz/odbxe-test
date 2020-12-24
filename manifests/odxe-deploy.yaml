@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: odxetest
+  namespace: odbpoc
+  labels:
+    app: odxetest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: odxetest
+  template:
+    metadata:
+      labels:
+        app: odxetest
+    spec:
+      containers:
+      - env:
+        - name: ORDB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: odxetest-config
+              key: ORDB_HOST
+        - name: ORDB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: odxetest-config
+              key: ORDB_PORT
+        - name: ORDB_DB
+          valueFrom:
+            configMapKeyRef:
+              name: odxetest-config
+              key: ORDB_DB
+        - name: ORDB_USER
+          valueFrom:
+            secretKeyRef:
+              name: odxetest-admin
+              key: ORDB_USER
+        - name: ORDB_PWD
+          valueFrom:
+            secretKeyRef:
+              name: odxetest-admin
+              key: ORDB_PWD
+        name: odxetest
+        image: berkayoz/odxetest:0.0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: listener
+      restartPolicy: Always

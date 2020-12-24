@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: odxetest-config
+  namespace: odbpoc
+data:
+  ORDB_HOST: AL32UTF8
+  ORDB_PORT: 1521
+  ORDB_DB: XEPDB1

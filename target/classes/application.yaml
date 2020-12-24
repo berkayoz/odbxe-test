@@ -1,0 +1,20 @@
+spring:
+  main:
+    banner-mode: off
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:oracle:thin:@//${ORDB_HOST}:${ORDB_PORT}/${ORDB_DB}
+    username: ${ORDB_USER}
+    password: ${ORDB_PWD}
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 5
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+  level:
+    org.hibernate.SQL: DEBUG
